@@ -25,6 +25,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@gi4nks'
 
       - name: Install dependencies
         run: npm install
@@ -41,5 +43,5 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use GITHUB_TOKEN for GitHub Packages
         run: npx semantic-release
