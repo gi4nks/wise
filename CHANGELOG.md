@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/gi4nks/wise/compare/v1.0.1...v1.0.2) (2026-04-17)
+
+
+### Bug Fixes
+
+* **release:** publish to npmjs.org instead of github packages ([b736f9e](https://github.com/gi4nks/wise/commit/b736f9ecccf24ede39195fbc51d690918aa27219))
+
 ## [1.0.1](https://github.com/gi4nks/wise/compare/v1.0.0...v1.0.1) (2026-04-17)
 
 
