@@ -21,7 +21,7 @@ export async function listOllamaModels(
       provider: 'ollama',
       description: `Ollama model ${model.name}`,
     }));
-  } catch (error) {
+  } catch (_error) {
     // Ollama might not be running or signal aborted
     return [];
   }

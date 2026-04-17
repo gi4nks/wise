@@ -38,7 +38,7 @@ export function ProviderKeyConfig({
       } else {
         setTestStatus((prev) => ({ ...prev, [provider]: 'error' }));
       }
-    } catch (err) {
+    } catch (_err) {
       setTestStatus((prev) => ({ ...prev, [provider]: 'error' }));
     }
   };
