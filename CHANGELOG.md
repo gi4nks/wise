@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/gi4nks/wise/compare/v1.0.0...v1.0.1) (2026-04-17)
+
+
+### Bug Fixes
+
+* **ci:** use GITHUB_TOKEN for publishing to GitHub Packages ([6813e55](https://github.com/gi4nks/wise/commit/6813e550cace0423311e75dffe47c40349719eee))
+
 # 1.0.0 (2026-04-17)
 
 
