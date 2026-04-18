@@ -8,10 +8,10 @@ export interface ModelInfo {
 }
 
 export interface ProviderConfig {
-  anthropic?: { apiKey: string };
-  gemini?: { apiKey: string };
-  ollama?: { baseUrl?: string }; // default: http://localhost:11434
-  openai?: { apiKey: string };
+  anthropic?: { apiKey: string; extraBody?: Record<string, any> };
+  gemini?: { apiKey: string; extraBody?: Record<string, any> };
+  ollama?: { baseUrl?: string; extraBody?: Record<string, any> }; // default: http://localhost:11434
+  openai?: { apiKey: string; extraBody?: Record<string, any> };
 }
 
 export interface ListModelsOptions {
