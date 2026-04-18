@@ -80,19 +80,19 @@ export function createAIModel(
       if (!config.anthropic?.apiKey) {
         throw new Error('Anthropic API key is missing');
       }
-      return createAnthropicClient(config.anthropic.apiKey)(modelId);
+      return createAnthropicClient(config.anthropic.apiKey)(modelId) as any;
     case 'gemini':
       if (!config.gemini?.apiKey) {
         throw new Error('Gemini API key is missing');
       }
-      return createGeminiClient(config.gemini.apiKey)(modelId);
+      return createGeminiClient(config.gemini.apiKey)(modelId) as any;
     case 'ollama':
-      return createOllamaClient(config.ollama?.baseUrl)(modelId);
+      return createOllamaClient(config.ollama?.baseUrl)(modelId) as any;
     case 'openai':
       if (!config.openai?.apiKey) {
         throw new Error('OpenAI API key is missing');
       }
-      return createOpenAIClient(config.openai.apiKey)(modelId);
+      return createOpenAIClient(config.openai.apiKey)(modelId) as any;
     default:
       throw new Error(`Unsupported provider: ${provider}`);
   }
