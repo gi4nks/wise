@@ -64,7 +64,8 @@
     "@ai-sdk/anthropic": "^1.1.9",
     "@ai-sdk/google": "^1.1.11",
     "@ai-sdk/openai": "^1.1.9",
-    "ai": "^4.1.45"
+    "ai": "^4.1.45",
+    "zod": "^3.24.2"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
