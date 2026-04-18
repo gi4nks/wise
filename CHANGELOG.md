@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/gi4nks/wise/compare/v1.1.1...v1.2.0) (2026-04-18)
+
+
+### Features
+
+* **core:** add extraBody support for custom provider parameters ([8ba41f3](https://github.com/gi4nks/wise/commit/8ba41f3d47fd3f8aca5147bc81dff9bf133e4697))
+
 ## [1.1.1](https://github.com/gi4nks/wise/compare/v1.1.0...v1.1.1) (2026-04-18)
 
 
