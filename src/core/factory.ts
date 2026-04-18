@@ -12,6 +12,7 @@ import {
 } from './providers/anthropic';
 import { listGeminiModels, createGeminiClient } from './providers/gemini';
 import { listOllamaModels, createOllamaClient } from './providers/ollama';
+import { listOpenAIModels, createOpenAIClient } from './providers/openai';
 
 export async function listModels(
   provider: ProviderName,
@@ -39,6 +40,11 @@ export async function listModels(
       case 'ollama':
         models = await listOllamaModels(config.ollama?.baseUrl, options);
         break;
+      case 'openai':
+        if (config.openai?.apiKey) {
+          models = await listOpenAIModels(config.openai.apiKey, options);
+        }
+        break;
     }
   } catch (error) {
     console.error(`Error listing models for ${provider}:`, error);
@@ -56,7 +62,7 @@ export async function listAllModels(
   config: ProviderConfig,
   options?: ListModelsOptions
 ): Promise<ModelInfo[]> {
-  const providers: ProviderName[] = ['anthropic', 'gemini', 'ollama'];
+  const providers: ProviderName[] = ['anthropic', 'gemini', 'ollama', 'openai'];
   const results = await Promise.allSettled(
     providers.map((p) => listModels(p, config, options))
   );
@@ -82,6 +88,11 @@ export function createAIModel(
       return createGeminiClient(config.gemini.apiKey)(modelId);
     case 'ollama':
       return createOllamaClient(config.ollama?.baseUrl)(modelId);
+    case 'openai':
+      if (!config.openai?.apiKey) {
+        throw new Error('OpenAI API key is missing');
+      }
+      return createOpenAIClient(config.openai.apiKey)(modelId);
     default:
       throw new Error(`Unsupported provider: ${provider}`);
   }

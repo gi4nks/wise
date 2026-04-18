@@ -18,6 +18,7 @@ export function ProviderKeyConfig({
       anthropic: { apiKey: '' },
       gemini: { apiKey: '' },
       ollama: { baseUrl: 'http://localhost:11434' },
+      openai: { apiKey: '' },
     }
   );
 
@@ -27,6 +28,7 @@ export function ProviderKeyConfig({
     anthropic: 'idle',
     gemini: 'idle',
     ollama: 'idle',
+    openai: 'idle',
   });
 
   const handleTest = async (provider: ProviderName) => {
@@ -45,6 +47,48 @@ export function ProviderKeyConfig({
 
   return (
     <div className={`space-y-4 ${className}`}>
+      {/* OpenAI */}
+      <div className="card bg-base-200 shadow-sm border border-base-300">
+        <div className="card-body p-4">
+          <h3 className="card-title text-sm flex justify-between items-center">
+            OpenAI
+            {testStatus.openai === 'success' && (
+              <div className="badge badge-success badge-sm">OK</div>
+            )}
+            {testStatus.openai === 'error' && (
+              <div className="badge badge-error badge-sm">Errore</div>
+            )}
+          </h3>
+          <div className="flex gap-2 items-end">
+            <div className="form-control flex-1">
+              <label className="label py-1">
+                <span className="label-text text-xs">API Key</span>
+              </label>
+              <input
+                type="password"
+                className="input input-bordered input-sm"
+                value={config.openai?.apiKey || ''}
+                onChange={(e) =>
+                  setConfig((prev) => ({
+                    ...prev,
+                    openai: { apiKey: e.target.value },
+                  }))
+                }
+                placeholder="sk-..."
+              />
+            </div>
+            <button
+              className={`btn btn-sm btn-outline ${
+                testStatus.openai === 'loading' ? 'loading' : ''
+              }`}
+              onClick={() => handleTest('openai')}
+            >
+              Test
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Anthropic */}
       <div className="card bg-base-200 shadow-sm border border-base-300">
         <div className="card-body p-4">
