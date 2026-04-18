@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/gi4nks/wise/compare/v1.0.3...v1.1.0) (2026-04-18)
+
+
+### Features
+
+* add openai provider support ([1e5a022](https://github.com/gi4nks/wise/commit/1e5a022cbcafda4877682dc05246a407ecc2fc3d))
+
 ## [1.0.3](https://github.com/gi4nks/wise/compare/v1.0.2...v1.0.3) (2026-04-18)
 
 
