@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/gi4nks/wise/compare/v1.0.2...v1.0.3) (2026-04-18)
+
+
+### Bug Fixes
+
+* upgrade zod for compatibility ([ebca461](https://github.com/gi4nks/wise/commit/ebca461fee110e55cc71de23b89434e6447dd7d3))
+
 ## [1.0.2](https://github.com/gi4nks/wise/compare/v1.0.1...v1.0.2) (2026-04-17)
 
 
