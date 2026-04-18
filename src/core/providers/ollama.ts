@@ -1,4 +1,4 @@
-import { createOpenAI } from '@ai-sdk/openai';
+import { createOllama } from 'ollama-ai-provider';
 import { ModelInfo, ListModelsOptions } from '../types';
 
 export async function listOllamaModels(
@@ -28,8 +28,7 @@ export async function listOllamaModels(
 }
 
 export function createOllamaClient(baseUrl: string = 'http://localhost:11434') {
-  return createOpenAI({
-    baseURL: `${baseUrl}/v1`,
-    apiKey: 'ollama', // Ollama doesn't require a key but SDK might expect one
+  return createOllama({
+    baseURL: `${baseUrl}/api`,
   });
 }
