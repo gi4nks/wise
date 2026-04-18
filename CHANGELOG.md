@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/gi4nks/wise/compare/v1.1.0...v1.1.1) (2026-04-18)
+
+
+### Bug Fixes
+
+* **ollama:** use native ollama-ai-provider to avoid version mismatch ([3a66823](https://github.com/gi4nks/wise/commit/3a66823bedfa6b44662bfb6d44e89aee6afb7bed))
+
 # [1.1.0](https://github.com/gi4nks/wise/compare/v1.0.3...v1.1.0) (2026-04-18)
 
 
