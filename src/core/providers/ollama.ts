@@ -1,4 +1,4 @@
-import { createOllama } from 'ollama-ai-provider';
+import { createOllama } from 'ai-sdk-ollama';
 import { ModelInfo, ListModelsOptions } from '../types';
 
 export async function listOllamaModels(
@@ -17,7 +17,7 @@ export async function listOllamaModels(
     const data = await response.json();
     return data.models.map((model: any) => ({
       id: model.name,
-      name: model.name.split(':')[0],
+      name: model.name,
       provider: 'ollama',
       description: `Ollama model ${model.name}`,
     }));
@@ -29,6 +29,6 @@ export async function listOllamaModels(
 
 export function createOllamaClient(baseUrl: string = 'http://localhost:11434') {
   return createOllama({
-    baseURL: `${baseUrl}/api`,
+    baseURL: baseUrl,
   });
 }

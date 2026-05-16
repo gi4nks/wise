@@ -1,3 +1,16 @@
+# [2.0.0](https://github.com/gi4nks/wise/compare/v1.2.1...v2.0.0) (2026-05-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* **providers:** factory API updated to support ProviderConfig discriminated union per provider type (anthropic.apiKey, gemini.apiKey, ollama.baseUrl, openai.apiKey+endpoint, opencode.apiKey+baseUrl)
+
+### Features
+
+* **opencode:** new OpenCode provider — listModels + createClient via OpenAI-compatible API
+* **react:** ProviderKeyConfig component with dynamic per-provider fields (apiKey for Anthropic/Gemini/OpenAI/OpenCode, baseUrl for Ollama/OpenCode)
+* **core:** factory now supports opencode provider name, proper ProviderConfig type narrowing
+
 # [1.2.0](https://github.com/gi4nks/wise/compare/v1.1.1...v1.2.0) (2026-04-18)
 
 

@@ -19,6 +19,7 @@ export function ProviderKeyConfig({
       gemini: { apiKey: '' },
       ollama: { baseUrl: 'http://localhost:11434' },
       openai: { apiKey: '' },
+      opencode: { apiKey: '', baseUrl: 'https://opencode.ai/zen/v1' },
     }
   );
 
@@ -29,6 +30,7 @@ export function ProviderKeyConfig({
     gemini: 'idle',
     ollama: 'idle',
     openai: 'idle',
+    opencode: 'idle',
   });
 
   const handleTest = async (provider: ProviderName) => {
@@ -208,6 +210,65 @@ export function ProviderKeyConfig({
                 testStatus.ollama === 'loading' ? 'loading' : ''
               }`}
               onClick={() => handleTest('ollama')}
+            >
+              Test
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* OpenCode */}
+      <div className="card bg-base-200 shadow-sm border border-base-300">
+        <div className="card-body p-4">
+          <h3 className="card-title text-sm flex justify-between items-center">
+            OpenCode
+            {testStatus.opencode === 'success' && (
+              <div className="badge badge-success badge-sm">OK</div>
+            )}
+            {testStatus.opencode === 'error' && (
+              <div className="badge badge-error badge-sm">Errore</div>
+            )}
+          </h3>
+          <div className="flex gap-2 items-end">
+            <div className="form-control flex-1">
+              <label className="label py-1">
+                <span className="label-text text-xs">API Key</span>
+              </label>
+              <input
+                type="password"
+                className="input input-bordered input-sm"
+                value={config.opencode?.apiKey || ''}
+                onChange={(e) =>
+                  setConfig((prev) => ({
+                    ...prev,
+                    opencode: { apiKey: e.target.value, baseUrl: prev.opencode?.baseUrl },
+                  }))
+                }
+                placeholder="sk-..."
+              />
+            </div>
+            <div className="form-control flex-1">
+              <label className="label py-1">
+                <span className="label-text text-xs">Base URL</span>
+              </label>
+              <input
+                type="url"
+                className="input input-bordered input-sm"
+                value={config.opencode?.baseUrl || ''}
+                onChange={(e) =>
+                  setConfig((prev) => ({
+                    ...prev,
+                    opencode: { apiKey: prev.opencode?.apiKey ?? '', baseUrl: e.target.value },
+                  }))
+                }
+                placeholder="https://opencode.ai/zen/v1"
+              />
+            </div>
+            <button
+              className={`btn btn-sm btn-outline ${
+                testStatus.opencode === 'loading' ? 'loading' : ''
+              }`}
+              onClick={() => handleTest('opencode')}
             >
               Test
             </button>

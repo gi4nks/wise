@@ -1,4 +1,4 @@
-export type ProviderName = 'anthropic' | 'gemini' | 'ollama' | 'openai';
+export type ProviderName = 'anthropic' | 'gemini' | 'ollama' | 'openai' | 'opencode';
 
 export interface ModelInfo {
   id: string;
@@ -12,6 +12,7 @@ export interface ProviderConfig {
   gemini?: { apiKey: string; extraBody?: Record<string, any> };
   ollama?: { baseUrl?: string; extraBody?: Record<string, any> }; // default: http://localhost:11434
   openai?: { apiKey: string; extraBody?: Record<string, any> };
+  opencode?: { apiKey: string; baseUrl?: string; extraBody?: Record<string, any> };
 }
 
 export interface ListModelsOptions {

@@ -2,7 +2,7 @@
 
 > Unified AI provider abstraction for the gi4nks monorepo.
 
-Wise provides a seamless way to interact with multiple AI providers (Anthropic, Gemini, Ollama) using a consistent API, real-time model discovery, and built-in React components for configuration and selection.
+Wise provides a seamless way to interact with multiple AI providers (Anthropic, Gemini, Ollama, OpenAI, OpenCode) using a consistent API, real-time model discovery, and built-in React components for configuration and selection.
 
 ## Features
 
@@ -29,7 +29,8 @@ import { listAllModels, createAIModel } from '@gi4nks/wise';
 const config = {
   anthropic: { apiKey: process.env.ANTHROPIC_API_KEY },
   gemini: { apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY },
-  ollama: { baseUrl: 'http://localhost:11434' }
+  ollama: { baseUrl: 'http://localhost:11434' },
+  opencode: { apiKey: process.env.OPENCODE_API_KEY, baseUrl: process.env.OPENCODE_BASE_URL }
 };
 
 // List all available models across providers

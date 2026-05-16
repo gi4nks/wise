@@ -1,6 +1,6 @@
 {
   "name": "@gi4nks/wise",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Unified AI provider abstraction for gi4nks monorepo",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -61,11 +61,12 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^1.1.9",
-    "@ai-sdk/google": "^1.1.11",
-    "@ai-sdk/openai": "^1.1.9",
-    "ai": "^4.1.45",
-    "ollama-ai-provider": "^1.2.0",
+    "@ai-sdk/anthropic": "^3.0.74",
+    "@ai-sdk/google": "^3.0.67",
+    "@ai-sdk/openai": "^3.0.59",
+    "@ai-sdk/openai-compatible": "^2.0.47",
+    "ai": "^6.0.174",
+    "ai-sdk-ollama": "^3.8.3",
     "zod": "^3.24.2"
   },
   "peerDependencies": {
