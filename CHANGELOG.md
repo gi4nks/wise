@@ -1,3 +1,16 @@
+# [1.3.0](https://github.com/gi4nks/wise/compare/v1.2.0...v1.3.0) (2026-05-16)
+
+
+### Bug Fixes
+
+* update factory test for static fallback models ([74bf27e](https://github.com/gi4nks/wise/commit/74bf27e169b07f3a9df548f55ddcc297b8ee26c9))
+
+
+### Features
+
+* **core:** implement dynamic model discovery with static fallbacks for gemini and anthropic ([c1c896b](https://github.com/gi4nks/wise/commit/c1c896b5c9b98420960358e0b83123e486e72a13))
+* v2.0.0 — OpenCode provider, ProviderKeyConfig, ProviderConfig types ([2595f4e](https://github.com/gi4nks/wise/commit/2595f4e2dc83ba63c5c683303f1dc728c155b0b0))
+
 # [2.0.0](https://github.com/gi4nks/wise/compare/v1.2.1...v2.0.0) (2026-05-16)
 
 
