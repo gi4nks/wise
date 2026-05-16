@@ -45,7 +45,7 @@ describe('listAllModels', () => {
     expect(ids).toContain('llama3:latest');
   });
 
-  it('should return empty list if fetch fails', async () => {
+  it('should return static fallback models when API is unreachable', async () => {
     (global.fetch as any).mockRejectedValue(new Error('Network error'));
     
     const config = {
@@ -53,6 +53,8 @@ describe('listAllModels', () => {
     };
     
     const models = await listAllModels(config);
-    expect(models).toHaveLength(0);
+    // Anthropic returns static fallback models when API is unreachable
+    expect(models.length).toBeGreaterThan(0);
+    expect(models.every(m => m.provider === 'anthropic')).toBe(true);
   });
 });
