@@ -57,4 +57,28 @@ describe('listAllModels', () => {
     expect(models.length).toBeGreaterThan(0);
     expect(models.every(m => m.provider === 'anthropic')).toBe(true);
   });
+
+  it('should list omlx models when omlx config is provided', async () => {
+    // Ollama always calls fetch (no config guard), so return empty
+    (global.fetch as any).mockImplementationOnce(async () => ({
+      ok: true,
+      status: 200,
+      json: async () => ({ models: [] }),
+    }));
+
+    (global.fetch as any).mockImplementationOnce(async () => ({
+      ok: true,
+      status: 200,
+      json: async () => ({ data: [{ id: 'Qwen3.5-122B-A10B-4bit' }, { id: 'Step-3.5-Flash-8bit' }] }),
+    }));
+
+    const config = {
+      omlx: { apiKey: 'test-key', baseUrl: 'http://parmenide:8010/v1' },
+    };
+
+    const models = await listAllModels(config);
+
+    expect(models).toHaveLength(2);
+    expect(models[0]).toMatchObject({ id: 'Qwen3.5-122B-A10B-4bit', provider: 'omlx' });
+  });
 });
