@@ -18,6 +18,7 @@ export function ProviderKeyConfig({
       anthropic: { apiKey: '' },
       gemini: { apiKey: '' },
       ollama: { baseUrl: 'http://localhost:11434' },
+      omlx: { apiKey: '', baseUrl: 'http://localhost:8000/v1' },
       openai: { apiKey: '' },
       opencode: { apiKey: '', baseUrl: 'https://opencode.ai/zen/v1' },
     }
@@ -29,6 +30,7 @@ export function ProviderKeyConfig({
     anthropic: 'idle',
     gemini: 'idle',
     ollama: 'idle',
+    omlx: 'idle',
     openai: 'idle',
     opencode: 'idle',
   });

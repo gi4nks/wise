@@ -17,6 +17,7 @@ import {
   listOpenCodeModels,
   createOpenCodeClient,
 } from './providers/opencode';
+import { listOmlxModels, createOmlxClient } from './providers/omlx';
 
 export async function listModels(
   provider: ProviderName,
@@ -58,6 +59,15 @@ export async function listModels(
           );
         }
         break;
+      case 'omlx':
+        if (config.omlx?.apiKey) {
+          models = await listOmlxModels(
+            config.omlx.apiKey,
+            config.omlx.baseUrl,
+            options
+          );
+        }
+        break;
     }
   } catch (error) {
     console.error(`Error listing models for ${provider}:`, error);
@@ -75,7 +85,7 @@ export async function listAllModels(
   config: ProviderConfig,
   options?: ListModelsOptions
 ): Promise<ModelInfo[]> {
-  const providers: ProviderName[] = ['anthropic', 'gemini', 'ollama', 'openai', 'opencode'];
+  const providers: ProviderName[] = ['anthropic', 'gemini', 'ollama', 'omlx', 'openai', 'opencode'];
   const results = await Promise.allSettled(
     providers.map((p) => listModels(p, config, options))
   );
@@ -114,7 +124,20 @@ export function createAIModel(
       if (!config.opencode?.apiKey) {
         throw new Error('OpenCode API key is missing');
       }
-      return createOpenCodeClient(config.opencode.apiKey, config.opencode.baseUrl)(modelId);
+      return createOpenCodeClient(
+        config.opencode.apiKey,
+        config.opencode.baseUrl,
+        config.opencode?.extraBody,
+      )(modelId);
+    case 'omlx':
+      if (!config.omlx?.apiKey) {
+        throw new Error('oMLX API key is missing');
+      }
+      return createOmlxClient(
+        config.omlx.apiKey,
+        config.omlx.baseUrl,
+        config.omlx?.extraBody,
+      )(modelId);
     default:
       throw new Error(`Unsupported provider: ${provider}`);
   }
