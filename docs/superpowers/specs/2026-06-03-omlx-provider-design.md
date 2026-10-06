@@ -36,7 +36,7 @@ Add oMLX as a new AI provider in the wise unified provider abstraction. oMLX is 
 const config = {
   omlx: {
     apiKey: process.env.OMLX_API_KEY,
-    baseUrl: 'http://parmenide:8010/v1',
+    baseUrl: 'http://lab-server:8010/v1',
   },
 };
 

@@ -2,7 +2,7 @@
 
 > Unified AI provider abstraction for the gi4nks monorepo.
 
-Wise provides a seamless way to interact with multiple AI providers (Anthropic, Gemini, Ollama, OpenAI, OpenCode) using a consistent API, real-time model discovery, and built-in React components for configuration and selection.
+Wise provides a seamless way to interact with multiple AI providers (Anthropic, Gemini, Ollama, oMLX, OpenAI, OpenCode) using a consistent API, real-time model discovery, and built-in React components for configuration and selection. Anthropic, Gemini, OpenAI, oMLX, and OpenCode can use a custom base URL for compatible gateways.
 
 ## Features
 
@@ -30,6 +30,7 @@ const config = {
   anthropic: { apiKey: process.env.ANTHROPIC_API_KEY },
   gemini: { apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY },
   ollama: { baseUrl: 'http://localhost:11434' },
+  omlx: { apiKey: process.env.OMLX_API_KEY, baseUrl: process.env.OMLX_BASE_URL },
   opencode: { apiKey: process.env.OPENCODE_API_KEY, baseUrl: process.env.OPENCODE_BASE_URL }
 };
 
@@ -46,6 +47,23 @@ const { text } = await generateText({
   prompt: 'Write a haiku about TypeScript.',
 });
 ```
+
+### Local OpenAI-compatible server (oMLX)
+
+oMLX uses its OpenAI-compatible `/v1` API. Set `baseUrl` to the API root and provide a non-empty placeholder key when the server does not require authentication:
+
+```ts
+import { createAIModel, listModels } from '@gi4nks/wise';
+
+const config = {
+  omlx: { apiKey: 'local', baseUrl: 'http://localhost:8000/v1' },
+};
+
+const models = await listModels('omlx', config);
+const model = createAIModel('omlx', models[0].id, config);
+```
+
+Custom `baseUrl` values on Anthropic, Gemini, and OpenAI are also used for model discovery and model requests. Their URLs should point to the respective provider-compatible API root.
 
 ### React API
 

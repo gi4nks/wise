@@ -73,7 +73,7 @@ describe('listAllModels', () => {
     }));
 
     const config = {
-      omlx: { apiKey: 'test-key', baseUrl: 'http://parmenide:8010/v1' },
+      omlx: { apiKey: 'test-key', baseUrl: 'http://lab-server:8010/v1' },
     };
 
     const models = await listAllModels(config);

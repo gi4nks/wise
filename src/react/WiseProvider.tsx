@@ -31,16 +31,16 @@ export function WiseProvider({
 }) {
   const [config, setConfig] = useState<WiseConfig>(initialConfig);
   const [models, setModels] = useState<ModelInfo[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const updateConfig = useCallback((patch: Partial<WiseConfig>) => {
     setConfig((prev) => ({ ...prev, ...patch }));
-  }, []);
-
-  const refreshModels = useCallback(async () => {
     setIsLoading(true);
     setError(null);
+  }, []);
+
+  const loadModels = useCallback(async () => {
     try {
       const fetchedModels = await listAllModels(config);
       setModels(fetchedModels);
@@ -51,9 +51,17 @@ export function WiseProvider({
     }
   }, [config]);
 
+  const refreshModels = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    await loadModels();
+  }, [loadModels]);
+
   useEffect(() => {
-    refreshModels();
-  }, [refreshModels]);
+    // Provider discovery is asynchronous; its state updates happen after fetch resolves.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void loadModels();
+  }, [loadModels]);
 
   return (
     <WiseContext.Provider

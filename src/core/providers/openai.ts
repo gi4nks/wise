@@ -3,12 +3,16 @@ import { ModelInfo, ListModelsOptions } from '../types';
 
 export async function listOpenAIModels(
   apiKey: string,
-  options?: ListModelsOptions
+  options?: ListModelsOptions,
+  baseUrl?: string
 ): Promise<ModelInfo[]> {
   // OpenAI doesn't have a very clean public model list endpoint without auth headers
   // We can use the standard one if needed
+  const modelsUrl = baseUrl
+    ? `${baseUrl.replace(/\/+$/, '')}/models`
+    : 'https://api.openai.com/v1/models';
   try {
-    const response = await fetch('https://api.openai.com/v1/models', {
+    const response = await fetch(modelsUrl, {
       headers: {
         'Authorization': `Bearer ${apiKey}`
       },
@@ -36,8 +40,9 @@ export async function listOpenAIModels(
   }
 }
 
-export function createOpenAIClient(apiKey: string) {
+export function createOpenAIClient(apiKey: string, baseUrl?: string) {
   return createOpenAI({
     apiKey,
+    ...(baseUrl ? { baseURL: baseUrl } : {}),
   });
 }

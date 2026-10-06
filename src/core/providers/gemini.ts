@@ -3,11 +3,15 @@ import { ModelInfo, ListModelsOptions } from '../types';
 
 export async function listGeminiModels(
   apiKey: string,
-  options?: ListModelsOptions
+  options?: ListModelsOptions,
+  baseUrl?: string
 ): Promise<ModelInfo[]> {
+  const base = baseUrl
+    ? baseUrl.replace(/\/+$/, '')
+    : 'https://generativelanguage.googleapis.com/v1beta';
   try {
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`,
+      `${base}/models?key=${apiKey}`,
       {
         signal: options?.signal,
       }
@@ -42,8 +46,9 @@ export async function listGeminiModels(
   }
 }
 
-export function createGeminiClient(apiKey: string) {
+export function createGeminiClient(apiKey: string, baseUrl?: string) {
   return createGoogleGenerativeAI({
     apiKey,
+    ...(baseUrl ? { baseURL: baseUrl } : {}),
   });
 }

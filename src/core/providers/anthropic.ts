@@ -3,10 +3,14 @@ import { ModelInfo, ListModelsOptions } from '../types';
 
 export async function listAnthropicModels(
   apiKey: string,
-  options?: ListModelsOptions
+  options?: ListModelsOptions,
+  baseUrl?: string
 ): Promise<ModelInfo[]> {
+  const modelsUrl = baseUrl
+    ? `${baseUrl.replace(/\/+$/, '')}/models`
+    : 'https://api.anthropic.com/v1/models';
   try {
-    const response = await fetch('https://api.anthropic.com/v1/models', {
+    const response = await fetch(modelsUrl, {
       headers: {
         'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
@@ -36,8 +40,9 @@ export async function listAnthropicModels(
   }
 }
 
-export function createAnthropicClient(apiKey: string) {
+export function createAnthropicClient(apiKey: string, baseUrl?: string) {
   return createAnthropic({
     apiKey,
+    ...(baseUrl ? { baseURL: baseUrl } : {}),
   });
 }

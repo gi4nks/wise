@@ -34,12 +34,20 @@ export async function listModels(
     switch (provider) {
       case 'anthropic':
         if (config.anthropic?.apiKey) {
-          models = await listAnthropicModels(config.anthropic.apiKey, options);
+          models = await listAnthropicModels(
+            config.anthropic.apiKey,
+            options,
+            config.anthropic.baseUrl,
+          );
         }
         break;
       case 'gemini':
         if (config.gemini?.apiKey) {
-          models = await listGeminiModels(config.gemini.apiKey, options);
+          models = await listGeminiModels(
+            config.gemini.apiKey,
+            options,
+            config.gemini.baseUrl,
+          );
         }
         break;
       case 'ollama':
@@ -47,7 +55,11 @@ export async function listModels(
         break;
       case 'openai':
         if (config.openai?.apiKey) {
-          models = await listOpenAIModels(config.openai.apiKey, options);
+          models = await listOpenAIModels(
+            config.openai.apiKey,
+            options,
+            config.openai.baseUrl,
+          );
         }
         break;
       case 'opencode':
@@ -103,15 +115,20 @@ export function createAIModel(
       if (!config.anthropic?.apiKey) {
         throw new Error('Anthropic API key is missing');
       }
-      return createAnthropicClient(config.anthropic.apiKey)(modelId);
+      return createAnthropicClient(config.anthropic.apiKey, config.anthropic.baseUrl)(modelId);
     case 'gemini':
       if (!config.gemini?.apiKey) {
         throw new Error('Gemini API key is missing');
       }
-      return createGeminiClient(config.gemini.apiKey)(modelId);
+      return createGeminiClient(config.gemini.apiKey, config.gemini.baseUrl)(modelId);
     case 'ollama':
       return createOllamaClient(config.ollama?.baseUrl)(modelId, {
-        think: false, // 🚀 QWEN/DEEPSEEK FIX: Disable thinking to avoid timeouts
+        // `think` is caller-controlled via extraBody (e.g. {think:false} for
+        // agentic calls that must reply fast). Omitting it keeps the model's
+        // hidden thinking channel: `content` stays clean prose and reasoning
+        // lands in the separate `thinking` field (2026-08-17: forcing
+        // think:false on Qwen3.5 makes it dump meta-analysis inline and write
+        // NO prose at all).
         ...config.ollama?.extraBody, // Spread injection payload at root
         options: config.ollama?.extraBody, // Keep for backward compatibility with Ollama options
       } as any);
@@ -119,7 +136,7 @@ export function createAIModel(
       if (!config.openai?.apiKey) {
         throw new Error('OpenAI API key is missing');
       }
-      return createOpenAIClient(config.openai.apiKey)(modelId);
+      return createOpenAIClient(config.openai.apiKey, config.openai.baseUrl)(modelId);
     case 'opencode':
       if (!config.opencode?.apiKey) {
         throw new Error('OpenCode API key is missing');

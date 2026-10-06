@@ -32,11 +32,14 @@ export async function listOpenCodeModels(
   }
 }
 
-export function createOpenCodeClient(apiKey: string, baseUrl?: string) {
+export function createOpenCodeClient(apiKey: string, baseUrl?: string, extraBody?: Record<string, any>) {
   const url = (baseUrl || DEFAULT_BASE_URL).replace(/\/$/, '');
   return createOpenAICompatible({
     name: 'opencode',
     baseURL: url,
     apiKey,
+    transformRequestBody: extraBody
+      ? (args: any) => ({ ...args, ...extraBody })
+      : undefined,
   });
 }
