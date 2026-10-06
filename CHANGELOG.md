@@ -1,3 +1,11 @@
+# [2.1.0](https://github.com/gi4nks/wise/compare/v2.0.0...v2.1.0) (2026-10-06)
+
+
+### Features
+
+* **providers:** add omlx provider with model listing and client creation ([d220ee8](https://github.com/gi4nks/wise/commit/d220ee8f294bebb31d1e4b7313e57e4ef315e0ce))
+* **types:** add omlx provider type ([7674bee](https://github.com/gi4nks/wise/commit/7674bee5a00285a145990a953d6de7964b880d0c))
+
 # [2.0.0](https://github.com/gi4nks/wise/compare/v1.3.0...v2.0.0) (2026-05-16)
 
 
