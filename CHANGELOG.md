@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/gi4nks/wise/compare/v1.3.0...v2.0.0) (2026-05-16)
+
+
+### Features
+
+* mark v2.0.0 as breaking change ([96a8ea6](https://github.com/gi4nks/wise/commit/96a8ea63aad08dfec3d4fdd1b58d68c183193f6b))
+
+
+### BREAKING CHANGES
+
+* ProviderConfig discriminated union per provider type
+
 # [1.3.0](https://github.com/gi4nks/wise/compare/v1.2.0...v1.3.0) (2026-05-16)
 
 
